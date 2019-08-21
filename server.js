@@ -6,6 +6,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const path = require('path');
 const middleware = require('./middleware/middleware');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(morgan('dev'));
 app.use(compression());
 app.use(bodyParser.json());
+app.use(auth);
 
 app.use(express.static(path.join(__dirname, './dist')));
 
