@@ -1,6 +1,7 @@
-const { CLIENT_ID, REDIRECT_URI } = process.env;
-
 const express = require('express');
+const Spotify = require('../services/Spotify');
+
+const { CLIENT_ID, REDIRECT_URI } = process.env;
 
 const router = express.Router();
 
@@ -14,6 +15,12 @@ const spotifyLogin = (req, res) => {
   );
 };
 
+const spotifyCallback = (req, res) => {
+  const { code } = req.query;
+  return Spotify.getToken(code).then(token => res.json(token));
+};
+
 router.get('/auth/login', spotifyLogin);
+router.get('/auth/callback', spotifyCallback);
 
 module.exports = router;
