@@ -2,18 +2,10 @@
 
 ## **Setup**
 
-1. Include the `.env` file from sherwin
+1. Create an `.env` file with the following variables and include in the root of the app
+   - CLIENT_ID=[FROM SPOTIFY DEV DASHBOARD]
+   - CLIENT_SECRET=[FROM SPOTIFY DEV DASHBOARD]
+   - REDIRECT_URI=[PATH AFTER SPOTIFY LOGIN]
 2. Install [Node 8.0.0 or greater](https://nodejs.org)
 3. `npm install` to install the app's dependencies
-4. `npm run dev` to start the webpack dev server on port `3000` and the express server on port `3001`
-
-## **What does this include?**
-
-Node.js backend <br/>
-React frontend <br/>
-React Router <br/>
-React Redux?? TODO <br/>
-CSS with Styled Components <br/>
-ESLint <br/>
-Prettier <br/>
-Webpack ejected <br/>
+4. `npm run dev` to start the webpack dev server on port `3002` and the express server on port `3001`
