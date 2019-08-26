@@ -18,6 +18,19 @@ const getToken = code =>
     json: true
   });
 
+const getRefreshToken = refreshToken =>
+  rp({
+    uri: `https://accounts.spotify.com/api/token`,
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
+    },
+    form: {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
+    },
+    json: true
+  });
+
 const getUser = token =>
   rp({
     uri: `https://api.spotify.com/v1/me`,
@@ -28,5 +41,6 @@ const getUser = token =>
 
 module.exports = {
   getToken,
+  getRefreshToken,
   getUser
 };
