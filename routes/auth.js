@@ -1,7 +1,7 @@
 const express = require('express');
 const Spotify = require('../services/Spotify');
 
-const { CLIENT_ID, REDIRECT_URI } = process.env;
+const { CLIENT_ID, REDIRECT_URI, BASE_PATH } = process.env;
 
 const router = express.Router();
 
@@ -43,7 +43,7 @@ const spotifyCallback = async (req, res) => {
   res.clearCookie('spotify_auth_state');
   const token = await Spotify.getToken(code);
   res.cookie('spotify_access_token', token.access_token);
-  return res.redirect('http://localhost:3002/');
+  return res.redirect(BASE_PATH);
 };
 
 const spotifyRefreshToken = (req, res) => {
@@ -51,7 +51,7 @@ const spotifyRefreshToken = (req, res) => {
   return Spotify.getRefreshToken(refresh_token)
     .then(token => {
       req.userToken = token;
-      return res.redirect('http://localhost:3002/');
+      return res.redirect(BASE_PATH);
     })
     .catch(err => err);
 };
