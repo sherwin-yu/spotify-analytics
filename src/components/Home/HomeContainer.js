@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import User from './User';
+import UserCount from './UserCount';
 
 class HomeContainer extends Component {
   constructor(props, context) {
@@ -39,6 +40,7 @@ class HomeContainer extends Component {
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div style={{ fontSize: '28px', fontWeight: '600' }}>Spotify Analytics</div>
             <User userInfo={userInfo} />
+            <UserCount />
           </div>
         </div>
       </div>
