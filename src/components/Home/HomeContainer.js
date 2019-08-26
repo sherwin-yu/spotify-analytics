@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import User from './User';
 
 class HomeContainer extends Component {
   constructor(props, context) {
@@ -13,6 +14,7 @@ class HomeContainer extends Component {
       .then(res => res.json())
       .then(userInfo => {
         this.state.userInfo = userInfo;
+        this.setState({ userInfo });
         console.log('userInfo', userInfo);
       });
   }
@@ -30,12 +32,14 @@ class HomeContainer extends Component {
   }
 
   render() {
-    // const { userInfo } = this.state;
+    const { userInfo } = this.state;
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12 col-md-6 offset-md-3" />
-          <div>Spotify Analytics</div>
+          <div className="col-xs-12 col-md-10 offset-md-1">
+            <div style={{ fontSize: '28px', fontWeight: '600' }}>Spotify Analytics</div>
+            <User userInfo={userInfo} />
+          </div>
         </div>
       </div>
     );
