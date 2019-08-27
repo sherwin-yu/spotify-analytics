@@ -8,7 +8,11 @@ class HomeContainer extends Component {
     super(props, context);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { userInfo: { followers: { total: 0 } }, topArtists: { items: [] }, topTracks: { items: [] } };
+    this.state = {
+      userInfo: { followers: { total: 0 }, playlistCount: 0 },
+      topArtists: { items: [] },
+      topTracks: { items: [] }
+    };
   }
 
   componentDidMount() {

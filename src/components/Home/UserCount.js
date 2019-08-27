@@ -10,7 +10,7 @@ const UserCount = ({ userInfo }) => (
   <div className="col-md-4 offset-md-4">
     <div className="row">
       <div className="col-md-6">
-        <CountWrapper>0 Playlists</CountWrapper>
+        <CountWrapper>{userInfo.playlistCount} Playlists</CountWrapper>
       </div>
       <div className="col-md-6">
         <CountWrapper>{userInfo.followers.total} Followers</CountWrapper>

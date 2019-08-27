@@ -7,10 +7,12 @@ const router = express.Router();
 const getUser = async (req, res) => {
   try {
     const user = await Spotify.getUser(req.cookies.spotify_access_token);
-    console.log('user', user);
-    const userFollowing = await Spotify.getUserFollowing(req.cookies.spotify_access_token, user.id);
-    console.log('userfollowing', userFollowing);
-    return res.send(user);
+    const userPlaylists = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, '1228291215');
+
+    return res.send({
+      ...user,
+      playlistCount: userPlaylists.total
+    });
   } catch (err) {
     return errorHandler(err, getUser.name, res);
   }
