@@ -48,7 +48,7 @@ const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
       </ol>
     </div>
     <div className="col-md-6">
-      <Title>Top Tracks</Title>
+      <Title>Top Songs</Title>
       <ol>
         {topTracks.items.map(track => (
           <ListItem key={track.id}>

@@ -26,7 +26,8 @@ const mismatchState = (req, res) => res.status(500).send('Mismatched State for A
 const spotifyLogin = (req, res) => {
   const state = generateRandomString(16);
   res.cookie('spotify_auth_state', state);
-  const scopes = 'user-read-private user-read-email user-top-read';
+  const scopes =
+    'user-read-private user-read-email user-top-read user-follow-read playlist-read-private playlist-read-collaborative';
   res.redirect(
     `https://accounts.spotify.com/authorize?response_type=code&client_id=${CLIENT_ID}&scope=${encodeURIComponent(
       scopes

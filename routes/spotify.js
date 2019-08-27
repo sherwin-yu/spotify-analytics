@@ -7,6 +7,9 @@ const router = express.Router();
 const getUser = async (req, res) => {
   try {
     const user = await Spotify.getUser(req.cookies.spotify_access_token);
+    console.log('user', user);
+    const userFollowing = await Spotify.getUserFollowing(req.cookies.spotify_access_token, user.id);
+    console.log('userfollowing', userFollowing);
     return res.send(user);
   } catch (err) {
     return errorHandler(err, getUser.name, res);

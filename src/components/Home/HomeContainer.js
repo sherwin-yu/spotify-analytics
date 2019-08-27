@@ -8,7 +8,7 @@ class HomeContainer extends Component {
     super(props, context);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { userInfo: {}, topArtists: { items: [] }, topTracks: { items: [] } };
+    this.state = { userInfo: { followers: { total: 0 } }, topArtists: { items: [] }, topTracks: { items: [] } };
   }
 
   componentDidMount() {
@@ -52,7 +52,7 @@ class HomeContainer extends Component {
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div style={{ fontSize: '28px', fontWeight: '600' }}>Spotify Analytics</div>
             <User userInfo={userInfo} />
-            <UserCount />
+            <UserCount userInfo={userInfo} />
             <TopArtistsAndTracks topArtists={topArtists} topTracks={topTracks} />
           </div>
         </div>
