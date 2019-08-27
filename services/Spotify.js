@@ -20,6 +20,7 @@ const getToken = code =>
 
 const getRefreshToken = refreshToken =>
   rp({
+    method: 'GET',
     uri: `https://accounts.spotify.com/api/token`,
     headers: {
       Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
@@ -33,7 +34,26 @@ const getRefreshToken = refreshToken =>
 
 const getUser = token =>
   rp({
+    method: 'GET',
     uri: `https://api.spotify.com/v1/me`,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+const getUserTopArtists = (token, limit = 20) =>
+  rp({
+    method: 'GET',
+    uri: `https://api.spotify.com/v1/me/top/artists?limit=${limit}`,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+const getUserTopTracks = (token, limit = 20) =>
+  rp({
+    method: 'GET',
+    uri: `https://api.spotify.com/v1/me/top/tracks?limit=${limit}`,
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -42,5 +62,7 @@ const getUser = token =>
 module.exports = {
   getToken,
   getRefreshToken,
-  getUser
+  getUser,
+  getUserTopArtists,
+  getUserTopTracks
 };
