@@ -7,7 +7,7 @@ const router = express.Router();
 const getUser = async (req, res) => {
   try {
     const user = await Spotify.getUser(req.cookies.spotify_access_token);
-    const userPlaylists = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, '1228291215');
+    const userPlaylists = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, user.id);
 
     return res.send({
       ...user,
