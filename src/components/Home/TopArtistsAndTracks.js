@@ -9,10 +9,30 @@ const ListItem = styled.li`
   font-size: 24px;
   a {
     text-decoration: none;
-    color: white;
+    color: #fff;
     &:hover {
       text-decoration: underline;
-      color: #1ed760;
+      color: #fff;
+    }
+  }
+`;
+
+const UnorderedList = styled.ul`
+  padding: 0;
+  font-size: 16px;
+  color: #b3b3b3;
+`;
+
+const SubListItem = styled.li`
+  font-size: 16px;
+  list-style-type: none;
+  display: inline;
+  a {
+    color: #b3b3b3;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: #fff;
     }
   }
 `;
@@ -33,14 +53,19 @@ const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
         {topTracks.items.map(track => (
           <ListItem key={track.id}>
             <a href={track.external_urls.spotify}>{track.name}</a>
-            <ul>
+            <UnorderedList>
               {track.artists &&
-                track.artists.map(artist => (
-                  <a key={artist.id} href={artist.external_urls.spotify} target="_blank">
-                    <li>{artist.name}</li>
-                  </a>
+                track.artists.map((artist, index) => (
+                  <>
+                    <SubListItem>
+                      <a key={artist.id} href={artist.external_urls.spotify} target="_blank">
+                        {artist.name}
+                      </a>
+                    </SubListItem>
+                    {index < track.artists.length - 1 ? ',\u00A0' : ''}
+                  </>
                 ))}
-            </ul>
+            </UnorderedList>
           </ListItem>
         ))}
       </ol>
