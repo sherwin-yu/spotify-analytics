@@ -82,6 +82,16 @@ const getUserTopTracks = (token, limit = 20) =>
     json: true
   });
 
+const getUserTrackAudioFeatures = (token, trackIds) =>
+  rp({
+    method: 'GET',
+    uri: `https://api.spotify.com/v1/audio-features?ids=${trackIds}`,
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    json: true
+  });
+
 module.exports = {
   getToken,
   getRefreshToken,
@@ -89,5 +99,6 @@ module.exports = {
   getUserPlaylists,
   getUserFollowing,
   getUserTopArtists,
-  getUserTopTracks
+  getUserTopTracks,
+  getUserTrackAudioFeatures
 };

@@ -38,8 +38,35 @@ const getUserTopTracks = async (req, res) => {
   }
 };
 
+const getUserTrackAudioFeatures = async (req, res) => {
+  try {
+    const topTracks = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, 50);
+    const trackIds = await topTracks.items.map(track => track.id).join();
+    const { audio_features: audioFeaturesOfTracks } = await Spotify.getUserTrackAudioFeatures(
+      req.cookies.spotify_access_token,
+      trackIds
+    );
+    return res.send(audioFeaturesOfTracks);
+  } catch (err) {
+    return errorHandler(err, getUserTrackAudioFeatures.name, res);
+  }
+};
+
+const getUserTopGenres = async (req, res) => {
+  try {
+    const { items: topArtists } = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, 50);
+    const genres = topArtists.map(topArtist => topArtist.genres);
+    const allGenres = await [].concat(...genres);
+    return res.send(allGenres);
+  } catch (err) {
+    return errorHandler(err, getUserTopGenres.name, res);
+  }
+};
+
 router.get('/api/spotify/me', getUser);
 router.get('/api/spotify/me/artists', getUserTopArtists);
 router.get('/api/spotify/me/tracks', getUserTopTracks);
+router.get('/api/spotify/me/genres', getUserTopGenres);
+router.get('/api/spotify/me/tracks/audio-features', getUserTrackAudioFeatures);
 
 module.exports = router;
