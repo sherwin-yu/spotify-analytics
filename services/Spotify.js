@@ -52,10 +52,10 @@ const getUserPlaylists = (token, userId, limit = 50) =>
     json: true
   });
 
-const getUserFollowing = (token, userId) =>
+const getUserFollowing = (token, limit = 50) =>
   rp({
     method: 'GET',
-    uri: `https://api.spotify.com/v1/me/following/contains?type=user&ids=${userId}`,
+    uri: `https://api.spotify.com/v1/me/following?type=artist&limit=${limit}`,
     headers: {
       Authorization: `Bearer ${token}`
     },

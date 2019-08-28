@@ -9,7 +9,7 @@ class HomeContainer extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      userInfo: { followers: { total: 0 }, playlistCount: 0 },
+      userInfo: { followers: { total: 0 }, playlistCount: 0, followingCount: 0 },
       topArtists: { items: [] },
       topTracks: { items: [] }
     };

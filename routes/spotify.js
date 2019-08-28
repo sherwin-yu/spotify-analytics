@@ -8,10 +8,12 @@ const getUser = async (req, res) => {
   try {
     const user = await Spotify.getUser(req.cookies.spotify_access_token);
     const userPlaylists = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, user.id);
+    const userFollowing = await Spotify.getUserFollowing(req.cookies.spotify_access_token);
 
     return res.send({
       ...user,
-      playlistCount: userPlaylists.total
+      playlistCount: userPlaylists.total,
+      followingCount: userFollowing.artists.total
     });
   } catch (err) {
     return errorHandler(err, getUser.name, res);

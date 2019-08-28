@@ -57,14 +57,14 @@ const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
             <UnorderedList>
               {track.artists &&
                 track.artists.map((artist, index) => (
-                  <>
+                  <div key={artist.id}>
                     <SubListItem>
-                      <a key={artist.id} href={artist.external_urls.spotify} target="_blank">
+                      <a href={artist.external_urls.spotify} target="_blank">
                         {artist.name}
                       </a>
                     </SubListItem>
                     {index < track.artists.length - 1 ? ',\u00A0' : ''}
-                  </>
+                  </div>
                 ))}
             </UnorderedList>
           </ListItem>
