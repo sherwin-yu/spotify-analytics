@@ -30,6 +30,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "morgan": "^1.9.0",
+    "nivo": "^0.31.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.2.0",
