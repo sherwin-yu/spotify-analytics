@@ -57,7 +57,15 @@ const getUserTopGenres = async (req, res) => {
     const { items: topArtists } = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, 50);
     const genres = topArtists.map(topArtist => topArtist.genres);
     const allGenres = await [].concat(...genres);
-    return res.send(allGenres);
+    const allGenresCount = Object.values(
+      allGenres.reduce((acc, currentValue) => {
+        acc[currentValue] = acc[currentValue] || [currentValue, 0];
+        // eslint-disable-next-line
+        acc[currentValue][1]++;
+        return acc;
+      }, {})
+    ).map(genre => ({ [genre[0]]: genre[1] }));
+    return res.send(allGenresCount);
   } catch (err) {
     return errorHandler(err, getUserTopGenres.name, res);
   }
