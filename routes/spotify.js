@@ -64,7 +64,7 @@ const getUserTopGenres = async (req, res) => {
         acc[currentValue][1]++;
         return acc;
       }, {})
-    ).map(genre => ({ [genre[0]]: genre[1] }));
+    ).map(genre => ({ id: genre[0], value: genre[1] }));
     return res.send(allGenresCount);
   } catch (err) {
     return errorHandler(err, getUserTopGenres.name, res);

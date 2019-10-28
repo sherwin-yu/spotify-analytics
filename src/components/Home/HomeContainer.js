@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import User from './User';
 import UserCount from './UserCount';
 import TopArtistsAndTracks from './TopArtistsAndTracks';
+import TopGenres from './TopGenres';
 
 class HomeContainer extends Component {
   constructor(props, context) {
@@ -11,7 +12,8 @@ class HomeContainer extends Component {
     this.state = {
       userInfo: { followers: { total: 0 }, playlistCount: 0, followingCount: 0 },
       topArtists: { items: [] },
-      topTracks: { items: [] }
+      topTracks: { items: [] },
+      genres: []
     };
   }
 
@@ -34,6 +36,12 @@ class HomeContainer extends Component {
         this.setState({ topTracks });
         console.log('topTracks', topTracks);
       });
+    fetch('/api/spotify/me/genres')
+      .then(res => res.json())
+      .then(genres => {
+        this.setState({ genres });
+        console.log('genres', genres);
+      });
   }
 
   handleChange(event) {
@@ -49,7 +57,7 @@ class HomeContainer extends Component {
   }
 
   render() {
-    const { userInfo, topArtists, topTracks } = this.state;
+    const { userInfo, topArtists, topTracks, genres } = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -58,6 +66,7 @@ class HomeContainer extends Component {
             <User userInfo={userInfo} />
             <UserCount userInfo={userInfo} />
             <TopArtistsAndTracks topArtists={topArtists} topTracks={topTracks} />
+            <TopGenres genres={genres} />
           </div>
         </div>
       </div>
