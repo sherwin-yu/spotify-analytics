@@ -27,7 +27,7 @@ const UnorderedList = styled.ul`
 const SubListItem = styled.li`
   font-size: 16px;
   list-style-type: none;
-  display: inline;
+  display: inline-block;
   a {
     color: #b3b3b3;
     text-decoration: none;
@@ -38,37 +38,46 @@ const SubListItem = styled.li`
   }
 `;
 
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 450px;
+  justify-content: space-around;
+`;
+
 const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
   <div className="row">
     <div className="col-md-6">
       <Title>Top Artists</Title>
       <ol>
-        {topArtists.items.map(artist => (
-          <ListItem key={artist.id}>{artist.name}</ListItem>
-        ))}
+        <Flex>
+          {topArtists.items.map(artist => (
+            <ListItem key={artist.id}>{artist.name}</ListItem>
+          ))}
+        </Flex>
       </ol>
     </div>
     <div className="col-md-6">
       <Title>Top Songs</Title>
       <ol>
-        {topTracks.items.map(track => (
-          <ListItem key={track.id}>
-            <a href={track.external_urls.spotify}>{track.name}</a>
-            <UnorderedList>
-              {track.artists &&
-                track.artists.map((artist, index) => (
-                  <div key={artist.id}>
-                    <SubListItem>
+        <Flex>
+          {topTracks.items.map(track => (
+            <ListItem key={track.id}>
+              <a href={track.external_urls.spotify}>{track.name}</a>
+              <UnorderedList>
+                {track.artists &&
+                  track.artists.map((artist, index) => (
+                    <SubListItem key={artist.id}>
                       <a href={artist.external_urls.spotify} target="_blank">
                         {artist.name}
                       </a>
+                      {index < track.artists.length - 1 ? ',\u00A0' : ''}
                     </SubListItem>
-                    {index < track.artists.length - 1 ? ',\u00A0' : ''}
-                  </div>
-                ))}
-            </UnorderedList>
-          </ListItem>
-        ))}
+                  ))}
+              </UnorderedList>
+            </ListItem>
+          ))}
+        </Flex>
       </ol>
     </div>
   </div>

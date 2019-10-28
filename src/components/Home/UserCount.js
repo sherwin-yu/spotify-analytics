@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const CountWrapper = styled.div`
   text-align: center;
   font-size: 18px;
+  margin-bottom: 30px;
 `;
 
 const UserCount = ({ userInfo }) => (
