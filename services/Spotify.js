@@ -62,20 +62,20 @@ const getUserFollowing = (token, limit = 50) =>
     json: true
   });
 
-const getUserTopArtists = (token, limit = 20) =>
+const getUserTopArtists = (token, limit = 20, timeRange = 'short_term') =>
   rp({
     method: 'GET',
-    uri: `https://api.spotify.com/v1/me/top/artists?limit=${limit}`,
+    uri: `https://api.spotify.com/v1/me/top/artists?limit=${limit}&time_range=${timeRange}`,
     headers: {
       Authorization: `Bearer ${token}`
     },
     json: true
   });
 
-const getUserTopTracks = (token, limit = 20) =>
+const getUserTopTracks = (token, limit = 20, timeRange = 'short_term') =>
   rp({
     method: 'GET',
-    uri: `https://api.spotify.com/v1/me/top/tracks?limit=${limit}`,
+    uri: `https://api.spotify.com/v1/me/top/tracks?limit=${limit}&time_range=${timeRange}`,
     headers: {
       Authorization: `Bearer ${token}`
     },

@@ -22,7 +22,8 @@ const getUser = async (req, res) => {
 
 const getUserTopArtists = async (req, res) => {
   try {
-    const topArtists = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, req.query.limit);
+    const { limit, time_range } = req.query;
+    const topArtists = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, limit, time_range);
     return res.send(topArtists);
   } catch (err) {
     return errorHandler(err, getUserTopArtists.name, res);
@@ -31,7 +32,8 @@ const getUserTopArtists = async (req, res) => {
 
 const getUserTopTracks = async (req, res) => {
   try {
-    const topTracks = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, req.query.limit);
+    const { limit, time_range } = req.query;
+    const topTracks = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, limit, time_range);
     return res.send(topTracks);
   } catch (err) {
     return errorHandler(err, getUserTopTracks.name, res);

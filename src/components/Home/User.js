@@ -6,7 +6,7 @@ const UserName = styled.div`
   font-size: 24px;
   font-weight: 500;
   text-align: center;
-  margin: 10px 0px;
+  margin: 15px 0px;
   a {
     color: white;
     text-decoration: none;

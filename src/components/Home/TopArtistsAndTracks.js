@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const Title = styled.div`
   font-size: 28px;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const ListItem = styled.li`
@@ -45,10 +47,17 @@ const Flex = styled.div`
   justify-content: space-around;
 `;
 
-const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
+const TopArtistsAndTracks = ({ topArtists, topTracks, handleChange }) => (
   <div className="row">
     <div className="col-md-6">
-      <Title>Top Artists</Title>
+      <Title>
+        <div>Top Artists</div>
+        <select name="artistTimeRange" onChange={handleChange}>
+          <option value="short_range">Last 4 Weeks</option>
+          <option value="medium_range">Last 6 Months</option>
+          <option value="long_range">All Time</option>
+        </select>
+      </Title>
       <ol>
         <Flex>
           {topArtists.items.map(artist => (
@@ -58,7 +67,14 @@ const TopArtistsAndTracks = ({ topArtists, topTracks }) => (
       </ol>
     </div>
     <div className="col-md-6">
-      <Title>Top Songs</Title>
+      <Title>
+        <div>Top Songs</div>
+        <select name="trackTimeRange" onChange={handleChange}>
+          <option value="short_range">Last 4 Weeks</option>
+          <option value="medium_range">Last 6 Months</option>
+          <option value="long_range">All Time</option>
+        </select>
+      </Title>
       <ol>
         <Flex>
           {topTracks.items.map(track => (

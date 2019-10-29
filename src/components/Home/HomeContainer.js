@@ -24,13 +24,13 @@ class HomeContainer extends Component {
         this.setState({ userInfo });
         console.log('userInfo', userInfo);
       });
-    fetch('/api/spotify/me/artists?limit=5')
+    fetch('/api/spotify/me/artists?limit=5&time_range=short_term')
       .then(res => res.json())
       .then(topArtists => {
         this.setState({ topArtists });
         console.log('topartists', topArtists);
       });
-    fetch('/api/spotify/me/tracks?limit=5')
+    fetch('/api/spotify/me/tracks?limit=5&time_range=short_term')
       .then(res => res.json())
       .then(topTracks => {
         this.setState({ topTracks });
@@ -48,6 +48,15 @@ class HomeContainer extends Component {
     event.preventDefault();
     const { name, value } = event.target;
     this.setState({ [name]: value }); // eslint-disable-line react/no-unused-state
+    console.log('name', `${name}: ${value}`);
+    if (name === 'trackTimeRange') {
+      fetch(`/api/spotify/me/tracks?limit=5&time_range=${value}`)
+        .then(res => res.json())
+        .then(topArtists => {
+          console.log('topartists', topArtists);
+          this.setState({ topArtists });
+        });
+    }
   }
 
   handleSubmit(event) {
@@ -62,10 +71,10 @@ class HomeContainer extends Component {
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
-            <div style={{ fontSize: '28px', fontWeight: '600' }}>Spotify Analytics</div>
+            <div style={{ fontSize: '28px', fontWeight: '600', marginBottom: '25px' }}>Spotify Analytics</div>
             <User userInfo={userInfo} />
             <UserCount userInfo={userInfo} />
-            <TopArtistsAndTracks topArtists={topArtists} topTracks={topTracks} />
+            <TopArtistsAndTracks topArtists={topArtists} topTracks={topTracks} handleChange={this.handleChange} />
             <TopGenres genres={genres} />
           </div>
         </div>
