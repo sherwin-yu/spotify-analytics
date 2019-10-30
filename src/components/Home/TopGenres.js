@@ -7,8 +7,7 @@ const HeightWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 22px;
 `;
 
 const Text = styled.div`

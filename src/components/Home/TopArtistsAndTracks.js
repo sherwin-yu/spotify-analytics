@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Title = styled.div`
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 22px;
   display: flex;
   justify-content: space-between;
 `;

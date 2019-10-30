@@ -71,7 +71,7 @@ class HomeContainer extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12 col-md-10 offset-md-1">
+          <div className="col-xs-12 col-md-12">
             <SpotifyIcon />
             <User userInfo={userInfo} />
             <UserCount userInfo={userInfo} />
