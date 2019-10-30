@@ -8,7 +8,23 @@ const Title = styled.div`
   justify-content: space-between;
 `;
 
-const ListItem = styled.li`
+const Artist = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+  }
+`;
+
+const Track = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 24px;
   a {
     text-decoration: none;
@@ -40,6 +56,13 @@ const SubListItem = styled.li`
   }
 `;
 
+const ArtistImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+`;
+
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,7 +84,10 @@ const TopArtistsAndTracks = ({ topArtists, topTracks, handleChange }) => (
       <ol>
         <Flex>
           {topArtists.items.map(artist => (
-            <ListItem key={artist.id}>{artist.name}</ListItem>
+            <Artist key={artist.id}>
+              <ArtistImage src={artist.images && artist.images[0].url} />
+              {artist.name}
+            </Artist>
           ))}
         </Flex>
       </ol>
@@ -78,20 +104,23 @@ const TopArtistsAndTracks = ({ topArtists, topTracks, handleChange }) => (
       <ol>
         <Flex>
           {topTracks.items.map(track => (
-            <ListItem key={track.id}>
-              <a href={track.external_urls.spotify}>{track.name}</a>
-              <UnorderedList>
-                {track.artists &&
-                  track.artists.map((artist, index) => (
-                    <SubListItem key={artist.id}>
-                      <a href={artist.external_urls.spotify} target="_blank">
-                        {artist.name}
-                      </a>
-                      {index < track.artists.length - 1 ? ',\u00A0' : ''}
-                    </SubListItem>
-                  ))}
-              </UnorderedList>
-            </ListItem>
+            <Track key={track.id}>
+              <ArtistImage src={track.album.images[0].url} />
+              <div>
+                <a href={track.external_urls.spotify}>{track.name}</a>
+                <UnorderedList>
+                  {track.artists &&
+                    track.artists.map((artist, index) => (
+                      <SubListItem key={artist.id}>
+                        <a href={artist.external_urls.spotify} target="_blank">
+                          {artist.name}
+                        </a>
+                        {index < track.artists.length - 1 ? ',\u00A0' : ''}
+                      </SubListItem>
+                    ))}
+                </UnorderedList>
+              </div>
+            </Track>
           ))}
         </Flex>
       </ol>

@@ -21,7 +21,7 @@ const TopGenres = ({ genres }) => (
     <Title>Top Genres</Title>
     <div className="row">
       <div className="col-md-5" style={{ display: 'flex' }}>
-        <Text>Your top genre is POP with it occuring 40% of the time in your top songs</Text>
+        <Text>Your top genre is Pop which occurs in 40% of your top songs</Text>
       </div>
       <div className="col-md-7">
         <HeightWrapper>
@@ -46,8 +46,8 @@ const TopGenres = ({ genres }) => (
             sliceLabel="id"
             slicesLabelsSkipAngle={10}
             slicesLabelsTextColor="#333333"
-            sortByValue="true"
-            animate="true"
+            sortByValue
+            animate
             motionStiffness={90}
             motionDamping={15}
             isInteractive={false}
