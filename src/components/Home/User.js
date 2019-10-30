@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ProfileImage from '../common/ProfileImage';
 
 const UserName = styled.div`
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 500;
   text-align: center;
   margin: 15px 0px;

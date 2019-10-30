@@ -52,7 +52,7 @@ const Image = styled.img`
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 450px;
+  min-height: 500px;
   justify-content: space-around;
 `;
 

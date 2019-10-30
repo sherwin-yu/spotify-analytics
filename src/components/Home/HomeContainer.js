@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SpotifyIcon from '../common/SpotifyIcon';
 import User from './User';
 import UserCount from './UserCount';
 import TopArtistsAndTracks from './TopArtistsAndTracks';
@@ -71,7 +72,7 @@ class HomeContainer extends Component {
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
-            <div style={{ fontSize: '28px', fontWeight: '600', marginBottom: '25px' }}>Spotify Analytics</div>
+            <SpotifyIcon />
             <User userInfo={userInfo} />
             <UserCount userInfo={userInfo} />
             <TopArtistsAndTracks topArtists={topArtists} topTracks={topTracks} handleChange={this.handleChange} />
