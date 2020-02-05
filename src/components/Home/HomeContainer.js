@@ -14,7 +14,8 @@ class HomeContainer extends Component {
       userInfo: { followers: { total: 0 }, playlistCount: 0, followingCount: 0 },
       topArtists: { items: [] },
       topTracks: { items: [] },
-      genres: []
+      genres: [],
+      audioFeatures: []
     };
   }
 
@@ -42,6 +43,12 @@ class HomeContainer extends Component {
       .then(genres => {
         this.setState({ genres });
         console.log('genres', genres);
+      });
+    fetch('/api/spotify/me/tracks/audio-features')
+      .then(res => res.json())
+      .then(audioFeatures => {
+        this.setState({ audioFeatures });
+        console.log('audioFeatures', audioFeatures);
       });
   }
 
