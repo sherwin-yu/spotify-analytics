@@ -19,7 +19,7 @@ class HomeContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     fetch('/api/spotify/me')
       .then(res => res.json())
       .then(userInfo => {
@@ -57,14 +57,6 @@ class HomeContainer extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value }); // eslint-disable-line react/no-unused-state
     console.log('name', `${name}: ${value}`);
-    if (name === 'trackTimeRange') {
-      fetch(`/api/spotify/me/tracks?limit=5&time_range=${value}`)
-        .then(res => res.json())
-        .then(topArtists => {
-          console.log('topartists', topArtists);
-          this.setState({ topArtists });
-        });
-    }
   }
 
   handleSubmit(event) {
