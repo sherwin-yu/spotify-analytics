@@ -1,5 +1,6 @@
 const express = require('express');
 const Spotify = require('../services/Spotify');
+const errorHandler = require('../utils/errorHandler');
 
 const { CLIENT_ID, REDIRECT_URI, BASE_PATH } = process.env;
 
@@ -42,19 +43,24 @@ const spotifyCallback = async (req, res) => {
     return mismatchState();
   }
   res.clearCookie('spotify_auth_state');
-  const token = await Spotify.getToken(code);
-  res.cookie('spotify_access_token', token.access_token);
-  return res.redirect(BASE_PATH);
+  try {
+    const token = await Spotify.getToken(code);
+    res.cookie('spotify_access_token', token.access_token);
+    return res.redirect(BASE_PATH);
+  } catch (err) {
+    return errorHandler(err, spotifyCallback.name, res);
+  }
 };
 
-const spotifyRefreshToken = (req, res) => {
+const spotifyRefreshToken = async (req, res) => {
   const { refresh_token } = req.query;
-  return Spotify.getRefreshToken(refresh_token)
-    .then(token => {
-      req.userToken = token;
-      return res.redirect(BASE_PATH);
-    })
-    .catch(err => err);
+  try {
+    const token = await Spotify.getRefreshToken(refresh_token);
+    req.userToken = token;
+    return res.redirect(BASE_PATH);
+  } catch (err) {
+    return errorHandler(err, spotifyRefreshToken.name, res);
+  }
 };
 
 router.get('/auth/login', spotifyLogin);
