@@ -1,6 +1,7 @@
 const express = require('express');
 const Spotify = require('../services/Spotify');
 const errorHandler = require('../utils/errorHandler');
+const token = require('../middleware/token');
 
 const router = express.Router();
 

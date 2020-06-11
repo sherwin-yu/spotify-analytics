@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import SpotifyIcon from '../common/SpotifyIcon';
 import User from './User';
 import UserCount from './UserCount';
@@ -20,42 +21,19 @@ class HomeContainer extends Component {
   }
 
   async componentDidMount() {
-    fetch('/api/spotify/me')
-      .then(res => res.json())
-      .then(userInfo => {
-        this.setState({ userInfo });
-        console.log('userInfo', userInfo);
-      });
-    fetch('/api/spotify/me/artists?limit=5&time_range=short_term')
-      .then(res => res.json())
-      .then(topArtists => {
-        this.setState({ topArtists });
-        console.log('topartists', topArtists);
-      });
-    fetch('/api/spotify/me/tracks?limit=5&time_range=short_term')
-      .then(res => res.json())
-      .then(topTracks => {
-        this.setState({ topTracks });
-        console.log('topTracks', topTracks);
-      });
-    fetch('/api/spotify/me/genres')
-      .then(res => res.json())
-      .then(genres => {
-        this.setState({ genres });
-        console.log('genres', genres);
-      });
-    fetch('/api/spotify/me/tracks/audio-features')
-      .then(res => res.json())
-      .then(audioFeatures => {
-        this.setState({ audioFeatures });
-        console.log('audioFeatures', audioFeatures);
-      });
+    const { data: userInfo } = await axios.get('/api/spotify/me');
+    const { data: topArtists } = await axios.get('/api/spotify/me/artists?limit=5&time_range=short_term');
+    const { data: topTracks } = await axios.get('/api/spotify/me/tracks?limit=5&time_range=short_term');
+    const { data: genres } = await axios.get('/api/spotify/me/genres');
+    const { data: audioFeatures } = await axios.get('/api/spotify/me/tracks/audio-features');
+    this.setState({ userInfo, topArtists, topTracks, genres, audioFeatures });
   }
 
   handleChange(event) {
     event.preventDefault();
     const { name, value } = event.target;
     this.setState({ [name]: value }); // eslint-disable-line react/no-unused-state
+    // eslint-disable-next-line no-console
     console.log('name', `${name}: ${value}`);
   }
 
