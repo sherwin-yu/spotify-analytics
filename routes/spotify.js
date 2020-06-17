@@ -6,9 +6,9 @@ const router = express.Router();
 
 const getUser = async (req, res) => {
   try {
-    const user = await Spotify.getUser(req.cookies.spotify_access_token);
-    const userPlaylists = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, user.id);
-    const userFollowing = await Spotify.getUserFollowing(req.cookies.spotify_access_token);
+    const { data: user } = await Spotify.getUser(req.cookies.spotify_access_token);
+    const { data: userPlaylists } = await Spotify.getUserPlaylists(req.cookies.spotify_access_token, user.id);
+    const { data: userFollowing } = await Spotify.getUserFollowing(req.cookies.spotify_access_token);
 
     return res.send({
       ...user,
@@ -23,7 +23,7 @@ const getUser = async (req, res) => {
 const getUserTopArtists = async (req, res) => {
   try {
     const { limit, time_range } = req.query;
-    const topArtists = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, limit, time_range);
+    const { data: topArtists } = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, limit, time_range);
     return res.send(topArtists);
   } catch (err) {
     return errorHandler(err, getUserTopArtists.name, res);
@@ -33,7 +33,7 @@ const getUserTopArtists = async (req, res) => {
 const getUserTopTracks = async (req, res) => {
   try {
     const { limit, time_range } = req.query;
-    const topTracks = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, limit, time_range);
+    const { data: topTracks } = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, limit, time_range);
     return res.send(topTracks);
   } catch (err) {
     return errorHandler(err, getUserTopTracks.name, res);
@@ -42,8 +42,8 @@ const getUserTopTracks = async (req, res) => {
 
 const getUserTrackAudioFeatures = async (req, res) => {
   try {
-    const topTracks = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, 50);
-    const trackIds = await topTracks.items.map(track => track.id).join();
+    const { data: topTracks } = await Spotify.getUserTopTracks(req.cookies.spotify_access_token, 50);
+    const { data: trackIds } = await topTracks.items.map(track => track.id).join();
     const { audio_features: audioFeaturesOfTracks } = await Spotify.getUserTrackAudioFeatures(
       req.cookies.spotify_access_token,
       trackIds
@@ -56,7 +56,9 @@ const getUserTrackAudioFeatures = async (req, res) => {
 
 const getUserTopGenres = async (req, res) => {
   try {
-    const { items: topArtists } = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, 50);
+    const {
+      data: { items: topArtists }
+    } = await Spotify.getUserTopArtists(req.cookies.spotify_access_token, 50);
     const genres = topArtists.map(topArtist => topArtist.genres);
     const allGenres = await [].concat(...genres);
     const allGenresCount = Object.values(

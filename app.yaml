@@ -4,3 +4,8 @@ instance_class: F1
 automatic_scaling:
   max_instances: 1
   min_instances: 0
+env_variables:
+  CLIENT_ID: 74232ce508b14be8bd4691baf4cb7fe8
+  CLIENT_SECRET: 3763ecaad5cb40319df392642c596343
+  REDIRECT_URI: https://spotify-overview.appspot.com/auth/callback
+  BASE_PATH: https://spotify-overview.appspot.com
