@@ -2,7 +2,7 @@ const express = require('express');
 const Spotify = require('../services/Spotify');
 const errorHandler = require('../utils/errorHandler');
 
-const { CLIENT_ID, REDIRECT_URI, BASE_PATH } = process.env;
+const { CLIENT_ID, REDIRECT_URI } = process.env;
 
 const router = express.Router();
 
@@ -46,7 +46,8 @@ const spotifyCallback = async (req, res) => {
   try {
     const token = await Spotify.getToken(code);
     res.cookie('spotify_access_token', token.access_token);
-    return res.redirect(BASE_PATH);
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    return res.redirect(baseUrl);
   } catch (err) {
     return errorHandler(err, spotifyCallback.name, res);
   }
@@ -55,9 +56,10 @@ const spotifyCallback = async (req, res) => {
 const spotifyRefreshToken = async (req, res) => {
   const { refresh_token } = req.query;
   try {
-    const token = await Spotify.getRefreshToken(refresh_token);
+    const { data: token } = await Spotify.getRefreshToken(refresh_token);
     req.userToken = token;
-    return res.redirect(BASE_PATH);
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    return res.redirect(baseUrl);
   } catch (err) {
     return errorHandler(err, spotifyRefreshToken.name, res);
   }

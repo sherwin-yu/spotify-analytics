@@ -9,5 +9,5 @@ module.exports = (err, location, res) => {
     Error Message: ${err.message}
     Error Stack: ${err.stack}
     -------------------------`);
-  res.status(err.status).json(err.message);
+  return res.status(err.status).json(err.message);
 };

@@ -34,7 +34,7 @@ app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, './dist/index.html'));
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`🔥 Server is listening on PORT:${PORT}`);

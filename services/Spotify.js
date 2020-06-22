@@ -1,10 +1,11 @@
 require('dotenv').config();
 const axios = require('axios');
+const rp = require('request-promise');
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = process.env;
 
 const getToken = code =>
-  axios({
+  rp({
     method: 'POST',
     uri: `https://accounts.spotify.com/api/token`,
     headers: {
@@ -14,7 +15,8 @@ const getToken = code =>
       grant_type: 'authorization_code',
       code,
       redirect_uri: REDIRECT_URI
-    }
+    },
+    json: true
   });
 
 const getRefreshToken = refreshToken =>
@@ -24,7 +26,7 @@ const getRefreshToken = refreshToken =>
     headers: {
       Authorization: `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
     },
-    form: {
+    data: {
       grant_type: 'refresh_token',
       refresh_token: refreshToken
     }
