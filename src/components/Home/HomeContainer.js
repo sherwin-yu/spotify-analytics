@@ -9,8 +9,6 @@ import TopGenres from './TopGenres';
 class HomeContainer extends Component {
   constructor(props, context) {
     super(props, context);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       userInfo: { followers: { total: 0 }, playlistCount: 0, followingCount: 0 },
       topArtists: { items: [] },
@@ -29,19 +27,19 @@ class HomeContainer extends Component {
     this.setState({ userInfo, topArtists, topTracks, genres, audioFeatures });
   }
 
-  handleChange(event) {
+  handleChange = event => {
     event.preventDefault();
     const { name, value } = event.target;
     this.setState({ [name]: value }); // eslint-disable-line react/no-unused-state
     // eslint-disable-next-line no-console
     console.log('name', `${name}: ${value}`);
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     // eslint-disable-next-line no-console
     console.log('SUBMITING', this.state);
-  }
+  };
 
   render() {
     const { userInfo, topArtists, topTracks, genres } = this.state;
