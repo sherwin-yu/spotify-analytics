@@ -3,12 +3,14 @@ import { hot } from 'react-hot-loader';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import HomeContainer from './components/Home/HomeContainer';
+import Login from './components/Login/Login';
 
 const App = () => (
   <div>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomeContainer} />
+        <Route exact path="/login" component={Login} />
         <Route
           path="*"
           component={() => (

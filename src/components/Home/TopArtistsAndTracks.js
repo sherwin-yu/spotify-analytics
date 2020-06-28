@@ -60,7 +60,7 @@ const TopArtistsAndTracks = ({ topArtists, topTracks, handleChange }) => (
     <div className="col-md-6">
       <Title>
         <div>Top Artists</div>
-        <select name="artistTimeRange" onChange={handleChange}>
+        <select name="topArtists" onChange={handleChange}>
           <option value="short_range">Last 4 Weeks</option>
           <option value="medium_range">Last 6 Months</option>
           <option value="long_range">All Time</option>
@@ -80,7 +80,7 @@ const TopArtistsAndTracks = ({ topArtists, topTracks, handleChange }) => (
     <div className="col-md-6">
       <Title>
         <div>Top Songs</div>
-        <select name="trackTimeRange" onChange={handleChange}>
+        <select name="topTracks" onChange={handleChange}>
           <option value="short_range">Last 4 Weeks</option>
           <option value="medium_range">Last 6 Months</option>
           <option value="long_range">All Time</option>
