@@ -33,15 +33,6 @@ function HomeContainer() {
     initialLoad();
   });
 
-  // async componentDidMount() {
-  //   const { data: userInfo } = await getSpotifyUser();
-  //   const { data: topArtists } = await getTopArtists('short_term');
-  //   const { data: topTracks } = await getTopTracks('short_term');
-  //   const { data: genres } = await getGenres();
-  //   const { data: audioFeatures } = await getAudioFeatures();
-  //   this.setState({ userInfo, topArtists, topTracks, genres, audioFeatures });
-  // }
-
   async function handleChange(event) {
     event.preventDefault();
     const { name, value } = event.target;
@@ -56,13 +47,9 @@ function HomeContainer() {
       console.log('err', err);
     }
 
-    // this.setState({ [name]: value }); // eslint-disable-line react/no-unused-state
-    // eslint-disable-next-line no-console
     console.log('name', `${name}: ${value}`);
   }
 
-  // render() {
-  // const { userInfo, topArtists, topTracks, genres } = this.state;
   return (
     <div className="container">
       <div className="row">

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import SpotifyIcon from '../common/SpotifyIcon';
 
 const Wrapper = styled.div`
@@ -35,6 +36,11 @@ const LoginButton = styled.button`
 `;
 
 function Login() {
+  async function handleLogin() {
+    console.log('clicked');
+    return axios.get('/auth/login');
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -43,7 +49,7 @@ function Login() {
             <SpotifyIcon />
             <Title>Spotify Overview</Title>
             <Subtext>See an overview of your Spotify listening habits</Subtext>
-            <LoginButton>LOGIN</LoginButton>
+            <LoginButton onClick={handleLogin}>LOGIN</LoginButton>
           </Wrapper>
         </div>
       </div>
