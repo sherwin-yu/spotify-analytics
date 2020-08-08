@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import SpotifyIcon from '../common/SpotifyIcon';
 
 const Wrapper = styled.div`
@@ -20,7 +19,7 @@ const Subtext = styled.div`
   margin-bottom: 2rem;
 `;
 
-const LoginButton = styled.button`
+const LoginButton = styled.a`
   background-color: #1db954;
   color: white;
   padding: 12px 8px;
@@ -29,6 +28,8 @@ const LoginButton = styled.button`
   border: 1px solid transparent;
   letter-spacing: 2px;
   font-weight: 500;
+  text-decoration: none;
+  text-align: center;
   &:hover {
     cursor: pointer;
     background-color: #04a03b;
@@ -36,11 +37,6 @@ const LoginButton = styled.button`
 `;
 
 function Login() {
-  async function handleLogin() {
-    console.log('clicked');
-    return axios.get('/auth/login');
-  }
-
   return (
     <div className="container">
       <div className="row">
@@ -49,7 +45,7 @@ function Login() {
             <SpotifyIcon />
             <Title>Spotify Overview</Title>
             <Subtext>See an overview of your Spotify listening habits</Subtext>
-            <LoginButton onClick={handleLogin}>LOGIN</LoginButton>
+            <LoginButton href="/auth/login">CONNECT</LoginButton>
           </Wrapper>
         </div>
       </div>

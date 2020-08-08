@@ -2,15 +2,19 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import ProtectedRoute from './components/common/ProtectedRoute';
 import HomeContainer from './components/Home/HomeContainer';
 import Login from './components/Login/Login';
+
+const token = Cookies.get('spotify_access_token');
 
 const App = () => (
   <div>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={HomeContainer} />
-        <Route exact path="/login" component={Login} />
+        <ProtectedRoute exact path="/" token={token} component={HomeContainer} />
+        <Route exact path="/connect" component={Login} />
         <Route
           path="*"
           component={() => (

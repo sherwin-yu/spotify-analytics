@@ -6,7 +6,7 @@ import TopArtistsAndTracks from './TopArtistsAndTracks';
 import TopGenres from './TopGenres';
 import { getSpotifyUser, getTopArtists, getTopTracks, getGenres, getAudioFeatures } from '../../api/spotify';
 
-function HomeContainer() {
+function HomeContainer({ router }) {
   const [userInfo, setUserInfo] = useState({ followers: { total: 0 }, playlistCount: 0, followingCount: 0 });
   const [topArtists, setTopArtists] = useState({ items: [] });
   const [topTracks, setTopTracks] = useState({ items: [] });
@@ -27,11 +27,11 @@ function HomeContainer() {
         setGenres(genresData);
         // setAudioFeatures(audioFeaturesData);
       } catch (err) {
-        console.log('err', err);
+        console.error('err', err);
       }
     }
     initialLoad();
-  });
+  }, [router]);
 
   async function handleChange(event) {
     event.preventDefault();
@@ -39,9 +39,8 @@ function HomeContainer() {
     console.log('name', `${name}: ${value}`);
     try {
       if (name === 'topArtists') {
-        console.log('data');
         const { data } = await getTopArtists(value);
-        console.log('data123', data);
+        console.log('data', data);
       }
     } catch (err) {
       console.log('err', err);
